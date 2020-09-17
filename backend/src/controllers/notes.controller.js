@@ -1,23 +1,43 @@
 const notesController = {};
 
-notesController.getNotes = (req, res) => {
-    res.json({ action: "getNotes"});
+const Note = require("../models/Note");
+
+notesController.getNotes = async (req, res) => {
+    const notes = await Note.find();
+    res.json(notes);
 }
 
-notesController.createNote = (req, res) => {
-    res.json({ action: "createNote" });
+notesController.createNote = async (req, res) => {
+    const { title, content, author } = req.body;
+    const newNote = new Note({ 
+        title,
+        content,
+        author
+    });
+    await newNote.save();
+    res.json(newNote);
 }
 
-notesController.getNote = (req, res) => {
-    res.json({ action: "getNote"});
+notesController.getNote = async (req, res) => {
+    const note = await Note.findById(req.params.id);
+    res.json(note);
 }
 
-notesController.updateNote = (req, res) => {
-    res.json({ action: "updateNote"});
+notesController.updateNote = async (req, res) => {
+    const { title, content, author } = req.body;
+    const updatedNote = await Note.findByIdAndUpdate(req.params.id, {
+        title,
+        content,
+        author
+    }, { new: true });
+    res.json(updatedNote);
 }
 
-notesController.deleteNote = (req, res) => {
-    res.json({ action: "deleteNote"});
+notesController.deleteNote = async (req, res) => {
+    const deletedNote = await Note.findOneAndDelete({
+        _id: req.params.id
+    });
+    res.json(deletedNote);
 }
 
 module.exports = notesController;

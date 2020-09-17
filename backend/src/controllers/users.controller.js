@@ -1,23 +1,34 @@
-const userController = {};
+const usersController = {};
+const User = require("../models/User");
 
-userController.getUsers = (req, res) => {
-    res.json({ action: "getUsers" });
+usersController.getUsers = async (req, res) => {
+    const users = await User.find();
+    res.json(users);
 }
 
-userController.createUser = (req, res) => {
-    res.json({ action: "createUser" });
+usersController.createUser = async (req, res) => {
+    const { username } = req.body;
+    const newUser = new User({ username });
+    await newUser.save();
+    res.json(newUser);
 }
 
-userController.getUser = (req, res) => {
-    res.json({ action: "getUser" });
+usersController.getUser = async (req, res) => {
+    const user = await User.findById(req.params.id);
+    res.json(user);
 }
 
-userController.updateUser = (req, res) => {
-    res.json({ action: "updateUser" });
+usersController.updateUser = async (req, res) => {
+    const { username } = req.body;
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, {
+        username
+    }, { new: true });
+    res.json(updatedUser);
 }
 
-userController.deleteUser = (req, res) => {
-    res.json({ action: "deleteUser" });
+usersController.deleteUser = async (req, res) => {
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    res.json(deletedUser);
 }
 
-module.exports = userController;
+module.exports = usersController;
