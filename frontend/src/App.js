@@ -13,11 +13,14 @@ function App() {
   return (
     <Router>
       <Navigation />
-      <div className="container mt-5">
-        <Route path="/" exact component={ NoteList } />
-        <Route path="/edit/:id" component={ NoteCreator } />
-        <Route path="/create" component={ NoteCreator } />
-        <Route path="/user" component={ UserCreator } />
+      
+        <div className="container mt-5">
+          <Route path="/" exact component={ NoteList } />
+          <Route path="/edit/:id" component={ NoteCreator } />
+          <Route path="/create" component={ NoteCreator } />
+          <Route path="/user" component={ UserCreator } />
+        
+
       </div>
     </Router>
   );
