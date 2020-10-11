@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export default class UserCreator extends Component {
 
-    baseURL = "http://localhost:4700/api/users";
+    baseURL = `http://localhost:${process.env.REACT_APP_API_PORT || 4700}/api/users`;
 
     state = {
         userList: [],

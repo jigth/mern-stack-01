@@ -5,7 +5,7 @@ import axios from 'axios';
 
 export default class NoteList extends Component {
 
-    baseURL = "http://localhost:4700/api/notes";
+    baseURL = `http://localhost:${process.env.REACT_APP_API_PORT || 4700}/api/notes`;
 
     state = {
         notes: []

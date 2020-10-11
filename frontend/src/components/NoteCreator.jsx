@@ -14,7 +14,7 @@ import axios from 'axios';
 // TODO: Using the previous step, create "Creation Mode" and "Updating Mode" in this component!
 
 export default class NoteCreator extends Component {
-    baseURL = "http://localhost:4700/api/notes";
+    baseURL = `http://localhost:${process.env.REACT_APP_API_PORT || 4700}/api/notes`;
 
     state = {
         editting: false,  // Used to edit specific note if required
