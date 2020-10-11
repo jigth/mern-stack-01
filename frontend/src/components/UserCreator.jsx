@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import config from '../config';
 
 export default class UserCreator extends Component {
 
-    baseURL = `http://localhost:${process.env.REACT_APP_API_PORT || 4700}/api/users`;
+    baseURL = `${config.API_BASE_URL}/users`;
 
     state = {
         userList: [],

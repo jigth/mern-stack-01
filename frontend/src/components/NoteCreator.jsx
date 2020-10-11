@@ -7,6 +7,7 @@
 
 import React, { Component } from 'react';
 import axios from 'axios';
+import config from '../config';
 
 //import { DatePicker } from 'react-date-picker';
 // TODO: Use React-Datepicker here to capture user's date
@@ -14,7 +15,7 @@ import axios from 'axios';
 // TODO: Using the previous step, create "Creation Mode" and "Updating Mode" in this component!
 
 export default class NoteCreator extends Component {
-    baseURL = `http://localhost:${process.env.REACT_APP_API_PORT || 4700}/api/notes`;
+    baseURL = `${config.API_BASE_URL}/notes`;
 
     state = {
         editting: false,  // Used to edit specific note if required
@@ -71,6 +72,7 @@ export default class NoteCreator extends Component {
 
     async componentDidMount() {
         const noteId = this.props.match.params.id;
+        console.log(this.baseURL);
         this.setState({
             noteId
         });

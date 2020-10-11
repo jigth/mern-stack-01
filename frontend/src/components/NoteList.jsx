@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import config from '../config';
 
 // TODO: Use timeago.js here to put the date in a human-friendly human-readable format
 
 export default class NoteList extends Component {
 
-    baseURL = `http://localhost:${process.env.REACT_APP_API_PORT || 4700}/api/notes`;
+    baseURL = `${config.API_BASE_URL}/notes`;
 
     state = {
         notes: []
